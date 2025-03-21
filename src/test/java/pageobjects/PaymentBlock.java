@@ -13,12 +13,12 @@ public class PaymentBlock {
     private static final Logger logger = LoggerFactory.getLogger(PaymentBlock.class);
 
     // Локаторы
-    private final By serviceDropdown = By.cssSelector("button.pay-section__select-toggle");
+    private final By serviceDropdown = By.xpath("//*[@id=\"pay-section\"]/div/div/div[2]/section/div/div[1]/div[1]/div[2]/button");
     private final By serviceOptions = By.cssSelector("li.pay-section__select-item");
-    private final By phoneInput = By.cssSelector("input#connection-phone");
-    private final By amountInput = By.cssSelector("input#connection-sum");
+    private final By phoneInput = By.id("connection-phone");
+    private final By amountInput = By.id("connection-sum");
     private final By emailInput = By.cssSelector("input#connection-email");
-    private final By continueButton = By.cssSelector("button.pay-form__submit");
+    private final By continueButton = By.cssSelector("#pay-connection button");
 
     public PaymentBlock(WebDriver driver, WebDriverWait wait) {
         this.driver = driver;
@@ -34,9 +34,9 @@ public class PaymentBlock {
                     By.xpath(String.format("//p[contains(., '%s')]", serviceName))
             ));
             scrollAndClick(option);
-            logger.info("Selected service: {}", serviceName);
+            logger.info("Выбранный сервис {}", serviceName);
         } catch (TimeoutException e) {
-            logger.error("Service selection timeout: {}", e.getMessage());
+            logger.error("Тайм-аут выбора сервиса {}", e.getMessage());
             throw e;
         }
     }
@@ -56,13 +56,13 @@ public class PaymentBlock {
 
     private void assertPlaceholder(By locator, String expected) {
         WebElement field = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-        assertEquals(expected, field.getAttribute("placeholder"),
-                "Placeholder mismatch for " + locator.toString());
+        assertEquals(expected, field.getDomAttribute("placeholder"),
+                "Несоответствие placeholder для " + locator.toString());
     }
 
     public void verifyContinueButtonState(boolean isActive) {
         WebElement button = wait.until(ExpectedConditions.visibilityOfElementLocated(continueButton));
         assertEquals(isActive, button.isEnabled(),
-                "Continue button state mismatch");
+                "Несоответствие состояния кнопки 'Продолжить'");
     }
 }

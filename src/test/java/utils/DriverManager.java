@@ -16,7 +16,7 @@ public class DriverManager {
         ChromeOptions options = new ChromeOptions();
         options.addArguments(
                 "--start-maximized",
-                "--disable-infobars",
+                "--disable-infos",
                 "--disable-extensions",
                 "--no-sandbox"
         );
