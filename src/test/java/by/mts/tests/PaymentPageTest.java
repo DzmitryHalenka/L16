@@ -63,10 +63,10 @@ public class PaymentPageTest {
 
     @Test
     public void testEmptyFieldPlaceholders() {
-        paymentPage.verifyService("Услуги связи", Locators.SERVICES_BUTTON, "Номер телефона", "Сумма", "E-mail для отправки чека");
-        paymentPage.verifyService("Домашний интернет", Locators.SERVICES_BUTTON, "Номер абонента", "Сумма", "E-mail для отправки чека");
-        paymentPage.verifyService("Рассрочка", Locators.SERVICES_BUTTON, "Номер счета на 44", "Сумма", "E-mail для отправки чека");
-        paymentPage.verifyService("Задолженность", Locators.SERVICES_BUTTON, "Номер счета на 2073", "Сумма", "E-mail для отправки чека");
+        paymentPage.verifyService("Услуги связи", "Номер телефона", "Сумма", "E-mail для отправки чека");
+        paymentPage.verifyService("Домашний интернет", "Номер абонента", "Сумма", "E-mail для отправки чека");
+        paymentPage.verifyService("Рассрочка", "Номер счета на 44", "Сумма", "E-mail для отправки чека");
+        paymentPage.verifyService("Задолженность", "Номер счета на 2073", "Сумма", "E-mail для отправки чека");
     }
 
     @Test

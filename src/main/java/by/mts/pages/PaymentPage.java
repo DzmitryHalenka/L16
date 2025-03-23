@@ -83,36 +83,47 @@ public class PaymentPage extends BasePage {
         Assert.assertTrue(isVisible, logoName + " логотип не виден.");
     }
 
-    public void verifyService(String serviceName, By serviceButtonLocator, String phoneFieldPlaceholder, String amountFieldPlaceholder, String emailFieldPlaceholder) {
-
+    public void verifyService(String serviceName, String phoneFieldPlaceholder, String amountFieldPlaceholder, String emailFieldPlaceholder) {
         selectService(serviceName);
         checkSelectedService(serviceName);
 
-        switch (serviceName) {
-            case "Услуги связи":
-                checkPlaceholder(Locators.PHONE_NUMBER_FIELD_CONNECTION, "Номер телефона");
-                checkPlaceholder(Locators.AMOUNT_FIELD_CONNECTION, amountFieldPlaceholder);
-                checkPlaceholder(Locators.EMAIL_FIELD_CONNECTION, emailFieldPlaceholder);
-                break;
-            case "Домашний интернет":
-                checkPlaceholder(Locators.PHONE_NUMBER_FIELD_INTERNET, "Номер абонента");
-                checkPlaceholder(Locators.AMOUNT_FIELD_INTERNET, amountFieldPlaceholder);
-                checkPlaceholder(Locators.EMAIL_FIELD_INTERNET, emailFieldPlaceholder);
-                break;
-            case "Рассрочка":
-                checkPlaceholder(Locators.PHONE_NUMBER_FIELD_INSTALMENT, "Номер счета на 44");
-                checkPlaceholder(Locators.AMOUNT_FIELD_INSTALMENT, amountFieldPlaceholder);
-                checkPlaceholder(Locators.EMAIL_FIELD_INSTALMENT, emailFieldPlaceholder);
-                break;
-            case "Задолженность":
-                checkPlaceholder(Locators.PHONE_NUMBER_FIELD_ARREARS, "Номер счета на 2073");
-                checkPlaceholder(Locators.AMOUNT_FIELD_ARREARS, amountFieldPlaceholder);
-                checkPlaceholder(Locators.EMAIL_FIELD_ARREARS, emailFieldPlaceholder);
-                break;
-            default:
-                throw new IllegalArgumentException("Unknown service: " + serviceName);
+        // Получаем локаторы для полей в зависимости от выбранной услуги
+        FieldLocators fieldLocators = getFieldLocatorsForService(serviceName);
+
+        // Проверка placeholder для полей
+        checkPlaceholder(fieldLocators.phoneField, phoneFieldPlaceholder);
+        checkPlaceholder(fieldLocators.amountField, amountFieldPlaceholder);
+        checkPlaceholder(fieldLocators.emailField, emailFieldPlaceholder);
+    }
+
+    // Вспомогательный метод для получения локаторов полей в зависимости от услуги
+    private FieldLocators getFieldLocatorsForService(String serviceName) {
+        return switch (serviceName) {
+            case "Услуги связи" ->
+                    new FieldLocators(Locators.PHONE_NUMBER_FIELD_CONNECTION, Locators.AMOUNT_FIELD_CONNECTION, Locators.EMAIL_FIELD_CONNECTION);
+            case "Домашний интернет" ->
+                    new FieldLocators(Locators.PHONE_NUMBER_FIELD_INTERNET, Locators.AMOUNT_FIELD_INTERNET, Locators.EMAIL_FIELD_INTERNET);
+            case "Рассрочка" ->
+                    new FieldLocators(Locators.PHONE_NUMBER_FIELD_INSTALMENT, Locators.AMOUNT_FIELD_INSTALMENT, Locators.EMAIL_FIELD_INSTALMENT);
+            case "Задолженность" ->
+                    new FieldLocators(Locators.PHONE_NUMBER_FIELD_ARREARS, Locators.AMOUNT_FIELD_ARREARS, Locators.EMAIL_FIELD_ARREARS);
+            default -> throw new IllegalArgumentException("Unknown service: " + serviceName);
+        };
+    }
+
+    // Вспомогательный класс для хранения локаторов
+    private static class FieldLocators {
+        By phoneField;
+        By amountField;
+        By emailField;
+
+        FieldLocators(By phoneField, By amountField, By emailField) {
+            this.phoneField = phoneField;
+            this.amountField = amountField;
+            this.emailField = emailField;
         }
     }
+
 
     private void checkPlaceholder(By locator, String expectedPlaceholder) {
         WebElement field = find(locator);
