@@ -46,7 +46,6 @@ public class PaymentPage extends BasePage {
         Assert.assertEquals(actualServiceName, expectedServiceName, "Ошибка: неверно выбрана услуга");
     }
 
-    // Универсальный метод для очистки полей
     public void clearFields(By phoneFieldLocator, By amountFieldLocator, By emailFieldLocator) {
         try {
             setText(phoneFieldLocator, "");
@@ -58,7 +57,6 @@ public class PaymentPage extends BasePage {
         }
     }
 
-    // Универсальный метод для ввода данных
     public void enterData(By phoneFieldLocator, By amountFieldLocator, By emailFieldLocator, String phoneNumber, String amount, String email) {
         try {
             setText(phoneFieldLocator, phoneNumber);
@@ -86,21 +84,18 @@ public class PaymentPage extends BasePage {
     }
 
     public void verifyService(String serviceName, By serviceButtonLocator, String phoneFieldPlaceholder, String amountFieldPlaceholder, String emailFieldPlaceholder) {
-        // Клик на кнопку выбора услуги
-        selectService(serviceName);
 
-        // Проверяем, что отображается правильное название услуги
+        selectService(serviceName);
         checkSelectedService(serviceName);
 
-        // Проверяем плейсхолдеры для полей в зависимости от услуги
         switch (serviceName) {
             case "Услуги связи":
-                checkPlaceholder(Locators.PHONE_NUMBER_FIELD_CONNECTION, "Номер телефона"); // Плейсхолдер для услуги "Услуги связи"
+                checkPlaceholder(Locators.PHONE_NUMBER_FIELD_CONNECTION, "Номер телефона");
                 checkPlaceholder(Locators.AMOUNT_FIELD_CONNECTION, amountFieldPlaceholder);
                 checkPlaceholder(Locators.EMAIL_FIELD_CONNECTION, emailFieldPlaceholder);
                 break;
             case "Домашний интернет":
-                checkPlaceholder(Locators.PHONE_NUMBER_FIELD_INTERNET, "Номер абонента"); // Плейсхолдер для услуги "Домашний интернет"
+                checkPlaceholder(Locators.PHONE_NUMBER_FIELD_INTERNET, "Номер абонента");
                 checkPlaceholder(Locators.AMOUNT_FIELD_INTERNET, amountFieldPlaceholder);
                 checkPlaceholder(Locators.EMAIL_FIELD_INTERNET, emailFieldPlaceholder);
                 break;
@@ -127,5 +122,12 @@ public class PaymentPage extends BasePage {
         Assert.assertNotNull(actualPlaceholder, "Плейсхолдер отсутствует у поля: " + locator);
         Assert.assertEquals(actualPlaceholder, expectedPlaceholder, "Ошибка в плейсхолдере для " + locator);
         System.out.println("Плейсхолдер для поля " + locator + " проверен успешно: " + actualPlaceholder);
+    }
+
+
+    public void enterData(String phone, String amount, String email) {
+        setText(Locators.PHONE_NUMBER_FIELD_CONNECTION, phone);
+        setText(Locators.AMOUNT_FIELD_CONNECTION, amount);
+        setText(Locators.EMAIL_FIELD_CONNECTION, email);
     }
 }

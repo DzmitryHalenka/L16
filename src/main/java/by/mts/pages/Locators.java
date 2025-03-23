@@ -14,7 +14,6 @@ public class Locators {
 
     // Services
     public static final By SERVICES_BUTTON = By.cssSelector("button.select__header");
-    public static final By SERVICE_OPTION = By.xpath("//ul[@class='select__list']//p[@class='select__option']");
     public static final By SELECTED_SERVICE_TEXT = By.cssSelector("span.select__now"); // Локатор для отображаемой выбранной услуги
     public static final By SERVICE_TYPE_BUTTON = By.linkText("Подробнее о сервисе");
 
@@ -39,50 +38,29 @@ public class Locators {
     public static final By AMOUNT_FIELD_ARREARS = By.id("arrears-sum");
     public static final By EMAIL_FIELD_ARREARS = By.id("arrears-email");
 
-    // Continue Button
+    // Кнопка Продолжить
     public static final By CONTINUE_BUTTON = By.cssSelector("#pay-connection button");
 
     // Payment Logos
     public static final By VISA_LOGO = By.cssSelector("img[alt='Visa']");
     public static final By MASTERCARD_LOGO = By.cssSelector("img[alt='MasterCard']");
 
-    // Details Link
-    public static final By DETAILS_LINK = By.cssSelector("a[href='/help/poryadok-oplaty-i-bezopasnost-internet-platezhey/']");
+    // Иконки платежных систем
+    public static final By VISA_ICON = By.cssSelector("img[src*='visa-system.svg']");
+    public static final By MASTERCARD_ICON = By.cssSelector("img[src*='mastercard-system.svg']");
+    public static final By BELKART_ICON = By.cssSelector("img[src*='belkart-system.svg']");
+    public static final By MAESTRO_ICON = By.cssSelector("img[src*='maestro-system.svg']");
+
+
+    // Локаторы для проверки полей фрэйма
+    public static final By CARD_NUMBER_LABEL = By.xpath("/html/body/app-root/div/div/div/app-payment-container/section/div/app-card-page/div/div[1]/app-card-input/form/div[1]/div[1]/app-input/div/div/div[1]/label");
+    public static final By EXPIRY_DATE_LABEL = By.xpath("/html/body/app-root/div/div/div/app-payment-container/section/div/app-card-page/div/div[1]/app-card-input/form/div[1]/div[2]/div[1]/app-input/div/div/div[1]/label");
+    public static final By CVV_LABEL = By.xpath("/html/body/app-root/div/div/div/app-payment-container/section/div/app-card-page/div/div[1]/app-card-input/form/div[1]/div[2]/div[3]/app-input/div/div/div[1]/label");
+    public static final By CARD_HOLDER_LABEL = By.xpath("/html/body/app-root/div/div/div/app-payment-container/section/div/app-card-page/div/div[1]/app-card-input/form/div[1]/div[3]/app-input/div/div/div[1]/label");
+
+    public static final By PAYMENT_FRAME = By.xpath("/html/body/div[8]/div/iframe");
+    public static final By AMOUNT_TEXT = By.xpath("/html/body/app-root/div/div/div/app-payment-container/section/div/div/div[1]/div[1]/span");
+    public static final By PHONE_NUMBER_TEXT = By.xpath("/html/body/app-root/div/div/div/app-payment-container/section/div/div/div[2]/span");
 }
 
 
-//public class Locators {
-//    // Блок cookies
-//    public static final By COOKIE_BLOCK = By.xpath("/html/body/div[6]/main/div/div[2]");
-//    public static final By ACCEPT_COOKIES_BTN = By.cssSelector(".btn.btn_black.cookie__ok");
-//
-//    // Блок с платежной информацией
-//    public static final By PAY_BLOCK_NAME = By.xpath("/html/body/div[6]/main/div/div[4]/div[1]/div/div/div[2]/section/div/h2");
-//
-//    // Кнопка выбора услуги
-//    public static final By SERVICES_BUTTON = By.cssSelector("button.select__header");
-//
-//    // Опции услуги
-//    public static final By SERVICE_OPTION = By.xpath("//ul[@class='select__list']//p[@class='select__option']");
-//
-//    // Текст выбранной услуги
-//    public static final By SELECTED_SERVICE_TEXT = By.cssSelector("span.select__now");
-//
-//    // Кнопка 'Подробнее о сервисе'
-//    public static final By SERVICE_TYPE_BUTTON = By.linkText("Подробнее о сервисе");
-//
-//    // Поля ввода для услуги "Услуги связи"
-//    public static final By PHONE_NUMBER_FIELD = By.id("connection-phone");
-//    public static final By AMOUNT_FIELD = By.id("connection-sum");
-//    public static final By EMAIL_FIELD = By.id("connection-email");
-//
-//    // Кнопка продолжения
-//    public static final By CONTINUE_BUTTON = By.cssSelector("#pay-connection button");
-//
-//    // Логотипы
-//    public static final By VISA_LOGO = By.cssSelector("img[alt='Visa']");
-//    public static final By MASTERCARD_LOGO = By.cssSelector("img[alt='MasterCard']");
-//
-//    // Ссылка на страницу помощи
-//    public static final By DETAILS_LINK = By.cssSelector("a[href='/help/poryadok-oplaty-i-bezopasnost-internet-platezhey/']");
-//}

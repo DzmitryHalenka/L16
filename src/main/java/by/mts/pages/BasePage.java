@@ -11,7 +11,7 @@ public class BasePage {
 
     public BasePage(WebDriver driver) {
         BasePage.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
     }
 
     // Метод для принятия cookies, если они присутствуют
@@ -52,11 +52,6 @@ public class BasePage {
     public void click(By locator) {
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
         element.click();
-    }
-
-    // Метод для получения текста элемента
-    protected String getText(By locator) {
-        return find(locator).getText();
     }
 
     // Проверка видимости элемента
